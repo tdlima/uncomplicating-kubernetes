@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: app-node
+  name: app_node-deployment
+  namespace: default
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: app-node
+  template:
+    metadata:
+      labels:
+        app: app-node
+        dc: UK
+    spec:
+      containers:
+      - image: jrlima31/node12:2.0
+        imagePullPolicy: Always
+        name: app-node
+        ports:
+        - containerPort: 3000
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30

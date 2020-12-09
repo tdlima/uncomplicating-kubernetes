@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nginx-ingress
+spec:
+  rules:
+  - host: master.us-central1-a.c.shaped-crossbar-296812.internal
+    http:
+      paths:
+      - backend:
+          service:
+            name: nginx-ingress
+            port:
+              number: 18080
+        path: /nginx_status
+        pathType: Prefix
